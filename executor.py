@@ -9,7 +9,7 @@ def run_code(code: str, language: str = "python") -> dict:
         if language == "python":
             result = subprocess.run(
                 ["python3", "-c", code],
-                capture_output=True, text=True, timeout=60
+                capture_output=True, text=True, timeout=120
             )
             return {
                 "stdout": result.stdout,
@@ -25,7 +25,7 @@ def run_code(code: str, language: str = "python") -> dict:
                     f.write(code)
                 result = subprocess.run(
                     ["node", filepath],
-                    capture_output=True, text=True, timeout=60
+                    capture_output=True, text=True, timeout=120
                 )
                 return {
                     "stdout": result.stdout,
@@ -41,13 +41,13 @@ def run_code(code: str, language: str = "python") -> dict:
                     f.write(code)
                 compile_result = subprocess.run(
                     ["javac", filepath],
-                    capture_output=True, text=True, timeout=30
+                    capture_output=True, text=True, timeout=120
                 )
                 if compile_result.returncode != 0:
                     return {"stdout": "", "stderr": compile_result.stderr, "success": False}
                 run_result = subprocess.run(
                     ["java", "-cp", tmpdir, "Main"],
-                    capture_output=True, text=True, timeout=30
+                    capture_output=True, text=True, timeout=120
                 )
                 return {
                     "stdout": run_result.stdout,
@@ -55,7 +55,7 @@ def run_code(code: str, language: str = "python") -> dict:
                     "success": run_result.returncode == 0
                 }
 
-        # ── HTML / CSS ── (no execution, AI reviews directly)
+        # ── HTML / CSS ──
         elif language in ["html", "css"]:
             return {
                 "stdout": "",
