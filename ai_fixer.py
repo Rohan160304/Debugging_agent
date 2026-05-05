@@ -1,6 +1,7 @@
 import json
 import os
 from groq import Groq
+import streamlit as st
 
 def get_api_key():
     # Try Streamlit secrets first
@@ -90,7 +91,7 @@ OUTPUT FORMAT:
 
     try:
         response = client.chat.completions.create(
-            model="llama-3.3-70b-versatile",
+            model="llama-3.1-8b-instant",
             messages=[
                 {
                     "role": "system",

@@ -90,7 +90,7 @@ Write a clean working version. Output raw code only."""
         st.error(f"Groq API error: {e}")
         return code
 
-
+st.info("⏳ First run may take 30-60 seconds — AI is warming up. Subsequent fixes will be faster.")
 if st.button("🚀 Run Agent"):
     if not code.strip():
         st.warning("Please paste some code first!")
@@ -135,7 +135,7 @@ if st.button("🚀 Run Agent"):
                 with st.expander(f"Raw error — attempt {attempt}"):
                     st.code(result["stderr"])
 
-                with st.spinner(f"🤖 AI fixing — attempt {attempt}..."):
+                with st.spinner(f"🤖 AI is analyzing and fixing your code — please wait..."):
                     fixed = force_ai_fix(
                         current_code,
                         analysis["error_type"],
